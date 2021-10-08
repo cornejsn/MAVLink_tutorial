@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<StrucDescription>
-  <StrucName>
-    <unStrucNameMember1 type="uint16">0</unStrucNameMember1>
-    <unStrucNameMember2 type="uint8">0</unStrucNameMember2>
-    <ulStrucNameMember3 type="int32">0</ulStrucNameMember3>
-    <bStrucNameMember4 type="bool">true</bStrucNameMember4>
-    <szStrucNameMember5 type="char" size="32"></szStrucNameMember5>
-  </StrucName>
-</StrucDescription>
+<contact>
+  <name>John Doe</name>
+  <email>j@doe.com</email>
+  <phone>555 12345</phone>
+</contact>

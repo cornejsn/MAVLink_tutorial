@@ -1,23 +1,44 @@
-#define CONFIG_CATCH_MAIN
+#define CATCH_CONFIG_MAIN
 #include <iostream>
 #include "catch.hpp"
-#include "src\pugixml.hpp"
-#include "src\pugixml.cpp"
+#include "main.cpp"
 
 using namespace std;
 
-string ParseXML (const char* xml) {
-    pugi::xml_document doc;
-    pugi::xml_parse_result result = doc.load_file(xml);
+TEST_CASE( "Check newly made contacts for info", "[contact]" ) {
+    SECTION("checking first contact") {
+        Contact newContact = createContact("sample.xml");
 
-    //cout << "Load result: " << result.description() << ", mesh name: " << doc.child("mesh").attribute("name").value() << endl;
-    return doc.child("mesh").attribute("name").value();
-}
+        REQUIRE( newContact.name == "John Doe");
+        REQUIRE( newContact.email == "j@doe.com");
+        REQUIRE( newContact.phone == "555 12345");
+    }
+    SECTION("checking second contact") {
+        Contact newContact = createContact("sample2.xml");
 
-TEST_CASE( "XML Parser is being tested", "[xml]" ) {
-    const char* xml_path = "docs/samples/tree.xml";
+        REQUIRE( newContact.name == "Chris Johnson");
+        REQUIRE( newContact.email == "c@johnson.com");
+        REQUIRE( newContact.phone == "819 951 1561");
+    }
+    SECTION("checking third contact") {
+        Contact newContact = createContact("sample3.xml");
 
-    SECTION( "Checking name of first child node" ) {
-        REQUIRE( ParseXML(xml_path) == "mesh root" );
+        REQUIRE( newContact.name == "Jane Doe");
+        REQUIRE( newContact.email == "ja@doe.com");
+        REQUIRE( newContact.phone == "104 156 6805");
+    }
+    SECTION("checking fourth contact") {
+        Contact newContact = createContact("sample4.xml");
+
+        REQUIRE( newContact.name == "Mary Beth");
+        REQUIRE( newContact.email == "m@beth.com");
+        REQUIRE( newContact.phone == "165 615 6527");
+    }
+    SECTION("checking fifth contact") {
+        Contact newContact = createContact("sample5.xml");
+
+        REQUIRE( newContact.name == "Greg Thompson");
+        REQUIRE( newContact.email == "g@thompson.com");
+        REQUIRE( newContact.phone == "314 134 3145");
     }
 }

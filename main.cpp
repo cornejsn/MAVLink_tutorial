@@ -1,29 +1,24 @@
 #include <iostream>
 #include "tinyxml2.h"
-// #include "src\pugixml.hpp"
-// #include "src\pugixml.cpp"
+#include "tinyxml2.cpp"
 
 using namespace std;
 
-// template <class XMLParser>
-// XMLParser ParseXML (XMLParser xml) {
-//     pugi::xml_document doc;
-//     pugi::xml_parse_result result = doc.load_file(xml);
+struct Contact {
+    string name;
+    string email;
+    string phone;
+};
 
-//     cout << "Load result: " << result.description() << ", mesh name: " << doc.child("mesh").attribute("name").value() << endl;
-//     return 0;
-// }
-
-int main() {
-    // const char* xml_path = "docs/samples/tree.xml";
-    // ParseXML(xml_path);
-
+Contact createContact (const char* path) {
     tinyxml2::XMLDocument doc;
-    doc.LoadFile("docs/samples/tree.xml");
+    doc.LoadFile(path);
     
-    // tinyxml2::XMLText* textNode = doc.FirstChildElement("xml")->FirstChildElement("mesh")->FirstChild()->ToText();
-    // const char* title = textNode->Value();
-    cout << doc << endl;
+    Contact contact;
+    
+    contact.name = doc.FirstChildElement("contact")->FirstChildElement("name")->GetText();
+    contact.email = doc.FirstChildElement("contact")->FirstChildElement("email")->GetText();
+    contact.phone = doc.FirstChildElement("contact")->FirstChildElement("phone")->GetText();
 
-    return 0;
+    return contact;
 }

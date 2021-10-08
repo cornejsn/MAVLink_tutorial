@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<contact>
-  <name>Chris Johnson</name>
-  <email>c@johnson.com</email>
-  <phone>819 951 1561</phone>
-</contact>
+<data>
+  <latitude>39.1816</latitude>
+  <longitude>-74.0872</longitude>
+  <temp>44.3</temp>
+</data>

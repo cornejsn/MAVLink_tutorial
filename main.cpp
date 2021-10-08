@@ -4,21 +4,26 @@
 
 using namespace std;
 
-struct Contact {
-    string name;
-    string email;
-    string phone;
+// Structure that holds marshalled flight data
+struct FlightData {
+    string latitude;
+    string longitude;
+    string temperature;
 };
 
-Contact createContact (const char* path) {
+// Function that takes in an XML path and marshalls that data into a C++ Struct
+FlightData createDataStruct (const char* path) {
+
+    // Parses XML data
     tinyxml2::XMLDocument doc;
     doc.LoadFile(path);
-    
-    Contact contact;
-    
-    contact.name = doc.FirstChildElement("contact")->FirstChildElement("name")->GetText();
-    contact.email = doc.FirstChildElement("contact")->FirstChildElement("email")->GetText();
-    contact.phone = doc.FirstChildElement("contact")->FirstChildElement("phone")->GetText();
 
-    return contact;
+    // Marshalling parsed data from XML into struct
+    FlightData data;
+    
+    data.latitude = doc.FirstChildElement("data")->FirstChildElement("latitude")->GetText();
+    data.longitude = doc.FirstChildElement("data")->FirstChildElement("longitude")->GetText();
+    data.temperature = doc.FirstChildElement("data")->FirstChildElement("temp")->GetText();
+
+    return data;
 }

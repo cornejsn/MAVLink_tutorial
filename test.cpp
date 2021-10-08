@@ -5,40 +5,29 @@
 
 using namespace std;
 
-TEST_CASE( "Check newly made contacts for info", "[contact]" ) {
-    SECTION("checking first contact") {
-        Contact newContact = createContact("sample.xml");
+// Running two tests to ensure that drone data is properly marshalled
+TEST_CASE( "Check flight data", "[data]" ) {
+    SECTION("checking first flight data") {
+        FlightData data = createDataStruct("sample.xml");
 
-        REQUIRE( newContact.name == "John Doe");
-        REQUIRE( newContact.email == "j@doe.com");
-        REQUIRE( newContact.phone == "555 12345");
+        REQUIRE( data.latitude == "40.5108");
+        REQUIRE( data.longitude == "-76.4630");
+        REQUIRE( data.temperature == "56.8");
     }
-    SECTION("checking second contact") {
-        Contact newContact = createContact("sample2.xml");
+    SECTION("checking second flight data") {
+        FlightData data = createDataStruct("sample2.xml");
 
-        REQUIRE( newContact.name == "Chris Johnson");
-        REQUIRE( newContact.email == "c@johnson.com");
-        REQUIRE( newContact.phone == "819 951 1561");
+        REQUIRE( data.latitude == "39.1816");
+        REQUIRE( data.longitude == "-74.0872");
+        REQUIRE( data.temperature == "44.3");
     }
-    SECTION("checking third contact") {
-        Contact newContact = createContact("sample3.xml");
+    SECTION("calculating differences between two flights") {
+        FlightData data1 = createDataStruct("sample.xml");
+        FlightData data2 = createDataStruct("sample2.xml");
 
-        REQUIRE( newContact.name == "Jane Doe");
-        REQUIRE( newContact.email == "ja@doe.com");
-        REQUIRE( newContact.phone == "104 156 6805");
-    }
-    SECTION("checking fourth contact") {
-        Contact newContact = createContact("sample4.xml");
+        REQUIRE( (stod(data1.latitude) - stod(data2.latitude)) == 1.3292);
+        REQUIRE( (stod(data1.longitude) - stod(data2.longitude)) == 2.3758);
+        REQUIRE( (stod(data1.temperature) - stod(data2.temperature)) == 12.5);
 
-        REQUIRE( newContact.name == "Mary Beth");
-        REQUIRE( newContact.email == "m@beth.com");
-        REQUIRE( newContact.phone == "165 615 6527");
-    }
-    SECTION("checking fifth contact") {
-        Contact newContact = createContact("sample5.xml");
-
-        REQUIRE( newContact.name == "Greg Thompson");
-        REQUIRE( newContact.email == "g@thompson.com");
-        REQUIRE( newContact.phone == "314 134 3145");
     }
 }
